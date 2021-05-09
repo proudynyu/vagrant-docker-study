@@ -20,6 +20,8 @@ Vagrant.configure("2") do |config|
 
     docker.vm.provision "shell", path: "./configs/scripts/docker_install.sh"
     docker.vm.provision "shell", 
-      inline: "docker run -d -p 8000:8000 -v \"/configs/src:/var/www\" -w \"/var/www\" node npm start"
+      inline: "docker build -t igorbecker/node /configs/src/."
+    docker.vm.provision "shell", 
+      inline: "docker run -d -p 8000:8000 igorbecker/node"
   end
 end
